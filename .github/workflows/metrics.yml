@@ -1,0 +1,32 @@
+name: Metrics
+on:
+  # Met à jour tous les jours à minuit
+  schedule: [{cron: "0 0 * * *"}]
+  # Permet de le lancer manuellement avec un bouton (pratique pour tester)
+  workflow_dispatch:
+  # Met à jour quand tu modifies la branche main
+  push: {branches: ["master", "main"]}
+
+jobs:
+  github-metrics:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: lowlighter/metrics@latest
+        with:
+          # Le secret que tu as créé à l'étape 1
+          token: ${{ secrets.METRICS_TOKEN }}
+
+          # --- CONFIGURATION ---
+          # Remplace 'ton-pseudo' par ton VRAI pseudo GitHub ci-dessous :
+          user: TristanDu76
+          template: classic
+          base: header, activity, community, repositories, metadata
+          config_timezone: Europe/Paris
+          
+          # --- PLUGINS ---
+          plugin_languages: yes
+          plugin_languages_ignored: html, css
+          plugin_isocalendar: yes
+          plugin_isocalendar_duration: half-year
