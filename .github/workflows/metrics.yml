@@ -24,7 +24,7 @@ jobs:
           template: classic
           base: header, activity, community, repositories, metadata
           config_timezone: Europe/Paris
-          config_display: large
+          config_display: small
           
           # --- PLUGINS ---
           plugin_languages: yes
